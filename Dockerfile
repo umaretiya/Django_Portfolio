@@ -6,7 +6,7 @@ FROM python:3.10
 ADD . /index
 
 # set the default directory where CMD will execute
-WORKDIR /app
+WORKDIR /django_portfolio
 
 COPY ./requirements.txt .
 
@@ -40,8 +40,15 @@ COPY . .
 # Expose ports
 EXPOSE $PORT
 
-CMD exec gunicorn portfolio.wsgi:application --bind 0.0.0.0:8000 --workers 3
+# CMD exec gunicorn portfolio.wsgi:application --bind 0.0.0.0:8000 --workers 3
+
 
 # docker build -t django_application_image .
 # $ sudo docker run -p 8000:8000 -i -t django_application_image
+# heroku config:set SECRET_KEY=djangoapp -a django-regress
 # django-regress
+
+# ENTRYPOINT [  ]
+# CMD [ "manage.py","runserver" ]
+
+CMD [ "python","manage.py", "runserver" ]
